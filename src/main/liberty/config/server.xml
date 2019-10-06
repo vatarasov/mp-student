@@ -4,6 +4,7 @@
     <featureManager>
         <feature>microProfile-3.0</feature>
         <feature>beanValidation-2.0</feature>
+        <feature>jpa-2.2</feature>
     </featureManager>
 
     <httpEndpoint id="defaultHttpEndpoint"
@@ -19,5 +20,14 @@
 
     <!-- The MP JWT configuration that injects the caller's JWT into a ResourceScoped bean for inspection. -->
     <mpJwt id="jwtUserConsumer" keyName="theKeyId" audiences="targetService" issuer="${jwt.issuer}"/>
+
+    <dataSource jndiName="jdbc/jpadatasource">
+        <jdbcDriver libraryRef="postgresLib" />
+        <properties.postgresql serverName="localhost" portNumber="5432" databaseName="mp_student" user="postgres" password="***"/>
+    </dataSource>
+
+    <library id="postgresLib">
+        <file name="${server.config.dir}/lib/postgresql.jar"/>
+    </library>
 
 </server>

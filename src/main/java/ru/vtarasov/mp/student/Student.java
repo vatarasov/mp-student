@@ -1,14 +1,17 @@
 package ru.vtarasov.mp.student;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.eclipse.persistence.annotations.UuidGenerator;
 
 /**
  * @author vtarasov
@@ -18,8 +21,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 @Getter @Setter
+@Entity
+@UuidGenerator(name="STUD_ID_GEN")
 public class Student {
-    @Null
+    @Id
+    @GeneratedValue(generator = "STUD_ID_GEN")
     private String id;
 
     @NotEmpty

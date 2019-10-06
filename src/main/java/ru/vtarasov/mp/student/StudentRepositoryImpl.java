@@ -1,33 +1,35 @@
 package ru.vtarasov.mp.student;
 
-import java.util.Map;
 import java.util.Optional;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 import javax.inject.Singleton;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 
 /**
  * @author vtarasov
  * @since 21.09.2019
  */
 @Singleton
+@Transactional
 public class StudentRepositoryImpl implements StudentRepository {
-    private Map<String, Student> students = new ConcurrentHashMap<>();
+    @PersistenceContext(name = "jpa-unit")
+    private EntityManager em;
 
     @Override
     public Optional<Student> get(String id) {
-        return Optional.ofNullable(students.get(id));
+        return Optional.ofNullable(em.find(Student.class, id));
     }
 
     @Override
     public void delete(String id) {
-        students.remove(id);
+        get(id).ifPresent(removed -> em.remove(removed));
     }
 
     @Override
     public Student save(Student student) {
-        Student registered = new Student(UUID.randomUUID().toString(), student.getName(), student.getAge());
-        students.put(registered.getId(), registered);
+        Student registered = new Student(null, student.getName(), student.getAge());
+        em.persist(registered);
         return registered;
     }
 }

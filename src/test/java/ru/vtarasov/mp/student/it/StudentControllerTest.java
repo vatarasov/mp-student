@@ -27,10 +27,6 @@ public class StudentControllerTest {
     private static final HttpClient CLIENT = HttpClientBuilder.create().build();
     private static final ObjectMapper JSON = new ObjectMapper();
 
-    /*
-    @Autowired
-    private ObjectMapper objectMapper;*/
-
     private static Student notRegisteredStudent;
     private static Student registeredStudent;
 

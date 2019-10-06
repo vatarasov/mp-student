@@ -29,6 +29,24 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
+      <groupId>io.openliberty.features</groupId>
+      <artifactId>jpa-2.2</artifactId>
+      <version>19.0.0.9</version>
+      <type>esa</type>
+    </dependency>
+    <dependency>
+      <groupId>org.liquibase</groupId>
+      <artifactId>liquibase-core</artifactId>
+      <version>3.6.3</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.openliberty.features</groupId>
+      <artifactId>cdi-2.0</artifactId>
+      <version>19.0.0.9</version>
+      <type>esa</type>
+    </dependency>
+    <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <version>1.18.10</version>
@@ -71,6 +89,35 @@
       <build>
         <plugins>
           <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <version>3.1.1</version>
+            <executions>
+              <execution>
+                <id>copy</id>
+                <phase>prepare-package</phase>
+                <goals>
+                  <goal>copy</goal>
+                </goals>
+              </execution>
+            </executions>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>org.postgresql</groupId>
+                  <artifactId>postgresql</artifactId>
+                  <version>42.2.6</version>
+                  <type>jar</type>
+                  <overWrite>false</overWrite>
+                  <outputDirectory>${project.build.directory}/liberty/wlp/usr/servers/student/lib</outputDirectory>
+                  <destFileName>postgresql.jar</destFileName>
+                </artifactItem>
+              </artifactItems>
+              <overWriteReleases>false</overWriteReleases>
+              <overWriteSnapshots>true</overWriteSnapshots>
+            </configuration>
+          </plugin>
+          <plugin>
             <groupId>net.wasdev.wlp.maven.plugins</groupId>
             <artifactId>liberty-maven-plugin</artifactId>
             <version>${openliberty.maven.version}</version>
@@ -86,6 +133,20 @@
                 <configuration>
                   <outputDirectory>target/wlp-package</outputDirectory>
                 </configuration>
+              </execution>
+              <execution>
+                <id>start-server</id>
+                <phase>pre-integration-test</phase>
+                <goals>
+                  <goal>test-start-server</goal>
+                </goals>
+              </execution>
+              <execution>
+                <id>stop-server</id>
+                <phase>post-integration-test</phase>
+                <goals>
+                  <goal>test-stop-server</goal>
+                </goals>
               </execution>
             </executions>
             <configuration>
