@@ -30,4 +30,6 @@
         <file name="${server.config.dir}/lib/postgresql.jar"/>
     </library>
 
+    <logging consoleLogLevel="INFO"/>
+
 </server>
