@@ -1,7 +1,8 @@
 package ru.vtarasov.mp.student;
 
+import javax.annotation.security.RolesAllowed;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.inject.Singleton;
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -22,7 +23,8 @@ import lombok.RequiredArgsConstructor;
  *
  */
 @Path("/student")
-@Singleton
+@RolesAllowed("default")
+@ApplicationScoped
 public class StudentController {
 
     @RequiredArgsConstructor

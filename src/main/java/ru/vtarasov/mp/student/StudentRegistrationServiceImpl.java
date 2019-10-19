@@ -1,8 +1,8 @@
 package ru.vtarasov.mp.student;
 
 import java.util.Optional;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.inject.Singleton;
 import lombok.extern.java.Log;
 
 /**
@@ -10,7 +10,7 @@ import lombok.extern.java.Log;
  * @since 21.09.2019
  */
 @Log
-@Singleton
+@ApplicationScoped
 public class StudentRegistrationServiceImpl implements StudentRegistrationService {
     @Inject
     private StudentRepository repository;
@@ -30,9 +30,6 @@ public class StudentRegistrationServiceImpl implements StudentRegistrationServic
 
     @Override
     public Optional<Student> find(String id) {
-        Optional<Student> student = repository.get(id);
-        student.ifPresent(student1 ->
-            LOG.info("Student was found. Id: " + student1.getId() + ", Name: " + student1.getName() + ", Age: " + student1.getAge()));
-        return student;
+        return repository.get(id);
     }
 }

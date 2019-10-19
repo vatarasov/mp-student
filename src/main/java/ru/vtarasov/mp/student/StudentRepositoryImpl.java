@@ -1,7 +1,7 @@
 package ru.vtarasov.mp.student;
 
 import java.util.Optional;
-import javax.inject.Singleton;
+import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -10,7 +10,7 @@ import javax.transaction.Transactional;
  * @author vtarasov
  * @since 21.09.2019
  */
-@Singleton
+@ApplicationScoped
 @Transactional
 public class StudentRepositoryImpl implements StudentRepository {
     @PersistenceContext(name = "jpa-unit")

@@ -29,10 +29,10 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>io.openliberty.features</groupId>
-      <artifactId>jpa-2.2</artifactId>
-      <version>19.0.0.9</version>
-      <type>esa</type>
+      <groupId>org.eclipse.persistence</groupId>
+      <artifactId>eclipselink</artifactId>
+      <version>2.7.1</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.liquibase</groupId>
@@ -41,11 +41,22 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>io.openliberty.features</groupId>
-      <artifactId>cdi-2.0</artifactId>
-      <version>19.0.0.9</version>
-      <type>esa</type>
+      <groupId>javax.ejb</groupId>
+      <artifactId>javax.ejb-api</artifactId>
+      <version>3.2.2</version>
     </dependency>
+    <dependency>
+      <groupId>javax.security.enterprise</groupId>
+      <artifactId>javax.security.enterprise-api</artifactId>
+      <version>1.0</version>
+      <scope>provided</scope>
+    </dependency>
+    <!--<dependency>
+      <groupId>io.openliberty.features</groupId>
+      <artifactId>mpJwt-1.1</artifactId>
+      <version>19.0.0.10</version>
+      <type>esa</type>
+    </dependency>-->
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
